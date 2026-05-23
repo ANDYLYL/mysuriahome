@@ -29,7 +29,8 @@ import {
   Plus,
   Flame,
   AlertTriangle,
-  Award
+  Award,
+  MessageSquare
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -842,7 +843,7 @@ export default function App() {
             {/* Step Wizard visual header */}
             <div className="bg-white/[0.02] border-b border-white/10 px-6 py-4 flex justify-between items-center sm:px-10">
               <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest font-mono">
-                Step {formStep} of 2: Installation Specifics
+                Step {formStep} of 2: {formStep === 1 ? "Installation Specifics" : "WhatsApp Enquiry"}
               </span>
               <div className="flex gap-1">
                 <span className={`h-1.5 w-10 rounded transition-all ${formStep >= 1 ? "bg-suria-gold animate-pulse" : "bg-white/10"}`}></span>
@@ -854,7 +855,7 @@ export default function App() {
               
               {/* Form container */}
               {!isSubmitted ? (
-                <form onSubmit={handleFormSubmit} className="space-y-6">
+                <div className="space-y-6">
                   
                   {/* STEP 1: Solar requirements & properties */}
                   {formStep === 1 && (
@@ -976,7 +977,7 @@ export default function App() {
                     </motion.div>
                   )}
 
-                  {/* STEP 2: Personal Contact Information */}
+                  {/* STEP 2: WhatsApp Prompt Screen */}
                   {formStep === 2 && (
                     <motion.div
                       initial={{ opacity: 0, x: 10 }}
@@ -984,131 +985,78 @@ export default function App() {
                       exit={{ opacity: 0, x: -10 }}
                       className="space-y-6"
                     >
-                      <div className="grid gap-6 sm:grid-cols-2">
+                      <div className="bg-white/[0.02] border border-white/10 p-5 rounded-2xl flex flex-col md:flex-row items-center gap-4 text-left">
+                        <div className="p-3 rounded-full bg-suria-teal/20 text-suria-teal">
+                          <MessageSquare className="h-6 w-6 stroke-[2.5]" />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-white">Interactive WhatsApp Direct Enquiry</h4>
+                          <p className="text-xs text-slate-300 leading-relaxed mt-1">
+                            Your customized residential solar proposal is ready! Click below to open WhatsApp and instantly connect with our SEDA certified specialist at <strong>+6010 284 1069</strong> to verify your TNB transformer voltage and lock in your priority rebate quota.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
                         {/* Name Input */}
                         <div>
                           <label htmlFor="fullName" className="block text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">
-                            Full Name * (as in MyKad/TNB Bill)
+                            My Name / Nickname (Pre-fills WhatsApp Draft)
                           </label>
                           <div className="relative">
                             <User className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
                             <input
                               type="text"
                               id="fullName"
-                              required
-                              placeholder="Lee Wei Ming"
+                              placeholder="e.g. Wei Ming"
                               value={formData.name}
                               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                               className="w-full rounded-xl border border-white/10 bg-white/5 py-3 pl-12 pr-4 text-sm font-semibold text-white focus:border-suria-gold focus:bg-suria-darker focus:outline-none"
                             />
                           </div>
                         </div>
-
-                        {/* Mobile Number Input */}
-                        <div>
-                          <label htmlFor="phoneNumber" className="block text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">
-                            Contact Phone (WhatsApp support) *
-                          </label>
-                          <div className="relative">
-                            <Phone className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                            <input
-                              type="tel"
-                              id="phoneNumber"
-                              required
-                              placeholder="+60 12-345 6789"
-                              value={formData.phone}
-                              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                              className="w-full rounded-xl border border-white/10 bg-white/5 py-3 pl-12 pr-4 text-sm font-semibold text-white focus:border-suria-gold focus:bg-suria-darker focus:outline-none"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Email Input */}
-                        <div className="sm:col-span-2">
-                          <label htmlFor="emailAddress" className="block text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">
-                            Email Address * (For official SEDA projection sheets)
-                          </label>
-                          <div className="relative">
-                            <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                            <input
-                              type="email"
-                              id="emailAddress"
-                              required
-                              placeholder="weiming.lee@gmail.com"
-                              value={formData.email}
-                              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                              className="w-full rounded-xl border border-white/10 bg-white/5 py-3 pl-12 pr-4 text-sm font-semibold text-white focus:border-suria-gold focus:bg-suria-darker focus:outline-none"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Contact Channel Preferment */}
-                        <div className="sm:col-span-2">
-                          <span className="block text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">
-                            Preferred Contact Method
-                          </span>
-                          <div className="grid grid-cols-3 gap-3">
-                            {["WhatsApp", "Phone Call", "Email Address"].map((channel) => (
-                              <button
-                                key={channel}
-                                type="button"
-                                onClick={() => setFormData({ ...formData, preferredContact: channel })}
-                                className={`rounded-xl py-3 text-center text-xs font-bold border transition-all cursor-pointer ${
-                                  formData.preferredContact === channel
-                                    ? "bg-suria-gold border-suria-gold text-black shadow-sm"
-                                    : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
-                                }`}
-                              >
-                                {channel}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
                       </div>
 
-                      {/* Policy Agreement Toggles */}
-                      <div className="pt-2">
-                        <label className="flex items-start gap-3 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={formData.agreePolicy}
-                            required
-                            onChange={(e) => setFormData({ ...formData, agreePolicy: e.target.checked })}
-                            className="mt-1 h-4 w-4 shrink-0 rounded border-white/20 text-suria-gold focus:ring-suria-teal bg-white/5 cursor-pointer"
-                          />
-                          <span className="text-xs text-slate-400 leading-relaxed">
-                            I authorize MySuriaHome to pre-screen my status coordinates against SEDA and TNB databases. I understand details are strictly guarded in alignment with the Malaysia Personal Data Protection Act (PDPA) 2010.
-                          </span>
-                        </label>
-                      </div>
-
-                      {/* Sticky CTA line with Lock badge */}
+                      {/* Sticky CTA line with direct WhatsApp opening anchor */}
                       <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <button
                           type="button"
                           onClick={() => setFormStep(1)}
-                          className="text-xs font-bold text-slate-400 hover:text-suria-gold underline order-2 sm:order-1 cursor-pointer"
+                          className="text-xs font-bold text-slate-400 hover:text-suria-gold underline order-2 sm:order-1 cursor-pointer font-mono"
                         >
-                          Back to Installation Specifics
+                          Back to Specifics
                         </button>
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-suria-gold px-8 py-4 font-bold text-black border border-suria-gold transition-all hover:opacity-90 shadow-md order-1 sm:order-2 disabled:opacity-50 cursor-pointer"
+                        
+                        <a
+                          href={`https://wa.me/60102841069?text=${encodeURIComponent(
+                            `Hello MySuriaHome Team! I would like to lock in my SuRIA rebate for my landed home.
+
+Here are my pre-evaluated details:
+- Name: ${formData.name || "Interested Homeowner"}
+- State location: ${formData.stateLocation}
+- Landed Property: ${formData.propertyType}
+- Recommended System Size: ${calculation.capacity} kWac
+- Estimated Net Price: RM ${calculation.finalCost.toLocaleString()}
+- Saved Rebate Value: RM ${calculation.rebate.toLocaleString()}
+- Preferred Site Survey Date: ${formData.selectedSlotDate}
+- Preferred Time Slot: ${formData.selectedSlotTime}
+
+Please guide me on qualifications and secure my slot!`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => {
+                            setIsSubmitted(true);
+                          }}
+                          className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 px-8 py-4 font-extrabold text-white border border-emerald-400/50 transition-all hover:scale-[1.02] shadow-xl shadow-emerald-500/10 order-1 sm:order-2 cursor-pointer font-sans"
                         >
-                          {isSubmitting ? (
-                            "Verifying Quota..."
-                          ) : (
-                            <>
-                              Submit Rebate Registration
-                              <Sparkles className="h-4.5 w-4.5 text-black animate-pulse" />
-                            </>
-                          )}
-                        </button>
+                          Send Enquiry to WhatsApp (+6010 284 1069)
+                          <MessageSquare className="h-4.5 w-4.5 text-white animate-pulse" />
+                        </a>
                       </div>
                     </motion.div>
                   )}
-                </form>
+                </div>
               ) : (
                 /* GORGEOUS SUCCESS BOARD */
                 <motion.div
@@ -1136,7 +1084,7 @@ export default function App() {
                         <span className="font-bold text-white">1. Verification:</span> Our SEDA consultant reviews your location via GIS roof solar density mappings within 2 hours.
                       </li>
                       <li className="flex gap-2">
-                        <span className="font-bold text-white">2. Document check:</span> Under SEDA rules, we'll reach out on <strong>{formData.preferredContact}</strong> ({formData.phone}) to request a PDF or photo snapshot of your TNB bill to verify correct transformer voltage scheduling.
+                        <span className="font-bold text-white">2. Document check:</span> Under SEDA rules, we'll reach out to your <strong>WhatsApp</strong> number to request a PDF or photo snapshot of your TNB bill to verify correct transformer voltage scheduling.
                       </li>
                       <li className="flex gap-2">
                         <span className="font-bold text-white">3. Proposal Draft:</span> An engineer will draft custom AutoCAD layout configurations representing exact module structures for free.
@@ -1365,15 +1313,15 @@ export default function App() {
               <ul className="space-y-2 text-xs font-mono">
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4 text-suria-teal shrink-0" />
-                  <a href="mailto:support@mysuriahome.com" className="hover:text-suria-gold transition-colors">support@mysuriahome.com</a>
+                  <a href="mailto:enquiry@neutogroup.com" className="hover:text-suria-gold transition-colors">enquiry@neutogroup.com</a>
                 </li>
                 <li className="flex items-center gap-2">
                   <Phone className="h-4 w-4 text-suria-teal shrink-0" />
-                  <span>+60 3-8000 2026</span>
+                  <a href="tel:+60102841069" className="hover:text-suria-gold transition-colors">+6010 284 1069</a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-suria-teal shrink-0" />
-                  <span>Kuala Lumpur, Malaysia</span>
+                <li className="flex items-start gap-2">
+                  <MapPin className="h-4 w-4 text-suria-teal shrink-0 mt-0.5" />
+                  <span>15 Jalan Bistari 15, <br />Taman Industri Jaya, <br />81300 Johor Bahru, <br />Johor Darul Ta'zim, Malaysia</span>
                 </li>
               </ul>
             </div>
