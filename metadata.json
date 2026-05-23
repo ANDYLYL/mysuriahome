@@ -1,0 +1,6 @@
+{
+  "name": "MySuriaHome",
+  "description": "Government solar rebate calculator and lead portal for Malaysian homeowners under PETRA Solar ATAP initiative.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
