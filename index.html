@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySuriaHome | SEDA Matched Solar Subsidy Estimator</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: { 50: '#ecfdf5', 100: '#d1fae5', 500: '#10b981', 600: '#059669', 700: '#047857', 900: '#064e3b' },
+                        solar: { 50: '#fefbeb', 100: '#fef3c7', 200: '#fde68a', 400: '#fbbf24', 500: '#f59e0b' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { scroll-behavior: smooth; }
+        .hidden-modal { display: none !important; }
+    </style>
+</head>
+<body class="font-sans antialiased text-slate-800 bg-slate-50">
+
+    <!-- Top Warning Banner -->
+    <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-950 text-white text-xs py-2 px-4 text-center font-medium">
+        <span class="text-solar-400 font-bold">ACT NOW:</span> SEDA SuRIA 250MW national quota operates on first-come, first-served. Secure matching quota now!
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100 py-4 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <div class="p-2 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-xl shadow-md">
+                    <i data-lucide="sun" class="text-white"></i>
+                </div>
+                <span class="font-display font-bold text-2xl text-slate-900">My<span class="text-emerald-600 font-extrabold">Suria</span>Home</span>
+            </div>
+            <nav class="hidden md:flex gap-8">
+                <a href="#program-details" class="text-sm font-medium text-slate-600 hover:text-emerald-600">About SuRIA</a>
+                <a href="#estimator-widget" class="text-sm font-medium text-slate-600 hover:text-emerald-600">Subsidy Estimator</a>
+            </nav>
+            <a href="#estimator-widget" class="px-5 py-2.5 rounded-full font-display font-semibold text-sm text-white bg-emerald-600 hover:bg-emerald-700 shadow-md">Check Eligibility</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-20 bg-slate-50 overflow-hidden text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold uppercase tracking-wider mb-6">
+                <i data-lucide="sparkles" class="h-3.5 w-3.5 text-solar-500"></i> RM1-for-RM1 Government Matching Program
+            </div>
+            <h1 class="font-display text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                Go Solar with a <span class="text-emerald-600">Double Subsidy</span> up to RM6,000!
+            </h1>
+            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+                Claim SEDA Malaysia's new SuRIA Home rebate of up to RM3,000, and we will match it RINGGIT TO RINGGIT with an additional RM3,000 discount. Stop paying premium domestic tariffs!
+            </p>
+            <a href="#estimator-widget" class="inline-flex items-center justify-center px-7 py-4 rounded-xl font-display font-semibold text-base text-white bg-emerald-600 hover:bg-emerald-700 shadow-xl transition-all">
+                Estimate Budget <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Program Details -->
+    <section id="program-details" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display font-black text-3xl text-center mb-12">Understanding the SEDA SuRIA Home Program</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700 mb-6">
+                        <i data-lucide="award"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-3">The Government Subsidy</h3>
+                    <p class="text-sm text-slate-500">Receive RM600 for every 1kWac of installed capacity. Designed to help middle-class families lower adoption costs.</p>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700 mb-6">
+                        <i data-lucide="scale"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-3">Maximum Funding Cap</h3>
+                    <p class="text-sm text-slate-500">The official entitlement is capped at a maximum of RM3,000 per eligible household (equivalent to a 5kWac array).</p>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700 mb-6">
+                        <i data-lucide="building-2"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-3">Company Matching</h3>
+                    <p class="text-sm text-slate-500">Every single Ringgit you qualify for under SEDA is matched by MySuriaHome instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estimator Widget -->
+    <section id="estimator-widget" class="py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="font-display font-black text-3xl text-slate-900 mb-4">Interactive Subsidy Estimator</h2>
+                <p class="text-slate-500">Drag the slider to match your rooftop's potential.</p>
+            </div>
+
+            <div class="bg-white border border-slate-200 p-8 rounded-3xl shadow-lg">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-display font-bold text-lg text-slate-900">System Capacity</h3>
+                    <div class="bg-emerald-600 px-4 py-2 rounded-xl text-white">
+                        <span id="display-capacity" class="font-display font-black text-2xl">5</span>
+                        <span class="text-xs font-bold uppercase text-emerald-100">kWac</span>
+                    </div>
+                </div>
+
+                <!-- Slider Input -->
+                <input type="range" id="capacity-slider" min="0" max="6" step="1" value="1" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none accent-emerald-600 mb-6">
+                
+                <div class="flex justify-between text-xs text-slate-400 font-mono font-bold mb-8">
+                    <span>4 kWac</span><span>5 kWac</span><span>6 kWac</span><span>8 kWac</span><span>10 kWac</span><span>12 kWac</span><span>15 kWac</span>
+                </div>
+
+                <!-- Financial Breakdown -->
+                <div class="space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                    <div class="flex justify-between text-sm text-slate-500">
+                        <span>Base System Cost:</span>
+                        <span id="val-base-price" class="font-mono">RM 0</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-semibold text-emerald-600">
+                        <span>SEDA Gov Rebate (RM600/kW):</span>
+                        <span id="val-govt-rebate" class="font-mono">- RM 0</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-semibold text-emerald-700">
+                        <span>MySuriaHome Match:</span>
+                        <span id="val-match-rebate" class="font-mono">- RM 0</span>
+                    </div>
+                    <div class="border-t border-slate-200 my-4"></div>
+                    <div class="flex justify-between items-center">
+                        <span class="font-display font-bold text-lg text-slate-900">Net Payable Price:</span>
+                        <span id="val-net-price" class="font-display font-black text-2xl text-emerald-600">RM 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Hidden Admin Trigger -->
+    <footer class="bg-slate-950 text-slate-400 py-8 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs">
+            <!-- Triple click the copyright to open Admin Panel -->
+            <div id="admin-trigger" class="cursor-pointer hover:text-white select-none inline-block p-2">
+                &copy; 2026 www.mysuriahome.com. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden-modal">
+        <div class="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl">
+            <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                <h3 class="font-display font-bold">Admin Configuration</h3>
+                <button onclick="closeAdmin()" class="text-slate-400 hover:text-white"><i data-lucide="x"></i></button>
+            </div>
+            
+            <!-- Auth Step -->
+            <div id="admin-auth" class="p-8 text-center">
+                <i data-lucide="lock" class="mx-auto h-8 w-8 text-emerald-600 mb-4"></i>
+                <input type="password" id="admin-pass" placeholder="Enter Passcode" class="w-full px-4 py-3 rounded-xl border border-slate-200 mb-4">
+                <button onclick="verifyAdmin()" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">Login</button>
+                <p id="admin-err" class="text-red-500 text-xs mt-3 hidden-modal">Incorrect passcode.</p>
+            </div>
+
+            <!-- Config Step -->
+            <div id="admin-config" class="p-8 hidden-modal">
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Base Price Rate (RM / kWp)</label>
+                <input type="number" id="admin-price-input" class="w-full px-4 py-3 rounded-xl border border-slate-200 mb-6 font-mono text-lg">
+                <button onclick="saveAdminPrice()" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">Save Pricing Parameters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Standardized sizing array[cite: 1]
+        const STANDARDIZED_CAPACITIES = [4, 5, 6, 8, 10, 12, 15];
+        
+        // Initial state variables
+        let currentCapacity = 5;
+        let pricePerKwp = parseInt(localStorage.getItem("mysuria_price_per_kwp")) || 4500;
+
+        // DOM Elements
+        const slider = document.getElementById("capacity-slider");
+        const displayCapacity = document.getElementById("display-capacity");
+        const valBasePrice = document.getElementById("val-base-price");
+        const valGovtRebate = document.getElementById("val-govt-rebate");
+        const valMatchRebate = document.getElementById("val-match-rebate");
+        const valNetPrice = document.getElementById("val-net-price");
+
+        // Calculator Engine[cite: 1]
+        function calculateAndRender() {
+            // Retrieve actual kWac from array index
+            currentCapacity = STANDARDIZED_CAPACITIES[slider.value];
+            displayCapacity.innerText = currentCapacity;
+
+            // DC Capacity scaling factor (1.3) rounded to even panels[cite: 1]
+            const targetDcW = currentCapacity * 1.3 * 1000;
+            const panels = Math.round(targetDcW / (620 * 2)) * 2;
+            const dcKwp = (panels * 620) / 1000;
+
+            // Mathematical Pricing Rules[cite: 1]
+            const rebatePerKwac = 600;
+            const maxIndividualRebate = 3000;
+            const baseSystemPrice = dcKwp * pricePerKwp;
+            
+            const govtRebate = Math.min(currentCapacity * rebatePerKwac, maxIndividualRebate);
+            const companySubsidy = Math.min(currentCapacity * rebatePerKwac, maxIndividualRebate);
+            
+            const totalSavings = govtRebate + companySubsidy;
+            const netPayable = baseSystemPrice - totalSavings;
+
+            // DOM Updates
+            valBasePrice.innerText = "RM " + Math.round(baseSystemPrice).toLocaleString();
+            valGovtRebate.innerText = "- RM " + govtRebate.toLocaleString();
+            valMatchRebate.innerText = "- RM " + companySubsidy.toLocaleString();
+            valNetPrice.innerText = "RM " + Math.round(netPayable).toLocaleString();
+        }
+
+        // Listen for slider changes
+        slider.addEventListener("input", calculateAndRender);
+
+        // Run calculation immediately on load
+        calculateAndRender();
+
+        /* --- Admin Panel Logic --- */
+        let clickCount = 0;
+        let lastClickTime = 0;
+        const adminModal = document.getElementById("admin-modal");
+        const adminAuth = document.getElementById("admin-auth");
+        const adminConfig = document.getElementById("admin-config");
+        const adminErr = document.getElementById("admin-err");
+        const adminPriceInput = document.getElementById("admin-price-input");
+
+        // Hidden Trigger: Triple click copyright[cite: 1]
+        document.getElementById("admin-trigger").addEventListener("click", () => {
+            const currentTime = Date.now();
+            if (currentTime - lastClickTime > 2000) {
+                clickCount = 1;
+            } else {
+                clickCount++;
+                if (clickCount >= 3) {
+                    adminModal.classList.remove("hidden-modal");
+                    adminAuth.classList.remove("hidden-modal");
+                    adminConfig.classList.add("hidden-modal");
+                    clickCount = 0;
+                }
+            }
+            lastClickTime = currentTime;
+        });
+
+        function closeAdmin() {
+            adminModal.classList.add("hidden-modal");
+            document.getElementById("admin-pass").value = "";
+            adminErr.classList.add("hidden-modal");
+        }
+
+        function verifyAdmin() {
+            const pass = document.getElementById("admin-pass").value;
+            if (pass === "admin123") { // Default passcode defined in system config[cite: 1]
+                adminAuth.classList.add("hidden-modal");
+                adminConfig.classList.remove("hidden-modal");
+                adminPriceInput.value = pricePerKwp;
+            } else {
+                adminErr.classList.remove("hidden-modal");
+            }
+        }
+
+        function saveAdminPrice() {
+            const newPrice = parseInt(adminPriceInput.value);
+            if (newPrice >= 1000 && newPrice <= 15000) {
+                pricePerKwp = newPrice;
+                localStorage.setItem("mysuria_price_per_kwp", newPrice); // Persist setting state[cite: 1]
+                calculateAndRender(); // Instantly update estimator[cite: 1]
+                alert("Pricing parameter updated successfully!");
+                closeAdmin();
+            } else {
+                alert("Please enter a valid price parameter.");
+            }
+        }
+    </script>
+</body>
+</html>
